@@ -1,0 +1,20 @@
+.hidden {
+   display: none !important;
+}
+.content, .peers, .video-container {
+   display: flex;
+}
+video {
+   background-color: #000;
+   height: 200px;
+   border: 1px solid #fff
+}
+.title, .description {
+   text-align: center;
+}
+.peer{
+   margin-right: 20px;
+}
+.flip {
+   transform: scale(-1, 1);
+}

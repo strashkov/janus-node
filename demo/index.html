@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>Janus nosip example</title>
+   <link rel="stylesheet" href="static/index.css">
+   <script type="text/javascript" src="static/index.js"></script>
+</head>
+<body>
+   <button id="start">Press to start the Demo</button>
+   <button id="release" class="hidden">Press to release</button>
+   <div id="content" class="content hidden">
+      <div class="peers">
+         <div class="peer">
+            <div class="title">Peer 1</div>
+            <div class="video-container">
+               <div class="video">
+                  <video id="localV1" class="flip" autoplay muted></video>
+                  <div class="description">local video</div>
+               </div>
+               <div class="video">
+                  <video id="remoteV1" autoplay></video>
+                  <div class="description">remote video</div>
+               </div>
+            </div>
+         </div>
+         <div class="peer">
+            <div class="title">Peer 2</div>
+            <div class="video-container">
+               <div class="video">
+                  <video id="localV2" class="flip" autoplay muted></video>
+                  <div class="description">local video</div>
+               </div>
+               <div class="video">
+                  <video id="remoteV2" autoplay></video>
+                  <div class="description">remote video</div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</body>
+</html>
