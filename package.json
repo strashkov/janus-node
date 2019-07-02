@@ -1,0 +1,44 @@
+{
+  "name": "janus-node",
+  "version": "1.0.0",
+  "description": "Node.js Janus Gateway",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build & node ./lib/index.js",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strashkov/janus-node.git"
+  },
+  "keywords": [
+    "janus",
+    "node"
+  ],
+  "author": "strashkov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/strashkov/janus-node/issues"
+  },
+  "homepage": "https://github.com/strashkov/janus-node#readme",
+  "devDependencies": {
+    "@types/body-parser": "^1.17.0",
+    "@types/cors": "^2.8.5",
+    "@types/express": "^4.17.0",
+    "@types/node": "^12.0.10",
+    "@types/ws": "^6.0.1",
+    "@types/yargs": "^13.0.0",
+    "nodemon": "^1.19.1",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.18.0",
+    "tslint-config-airbnb": "^5.11.1",
+    "typescript": "^3.5.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "ws": "^7.0.1",
+    "yargs": "^13.2.4"
+  }
+}
