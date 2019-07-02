@@ -81,6 +81,8 @@ class Peer extends EventTarget {
   }
   async request(type, data) {
     const { XHR_ENDPOINT } = await import('./env.js');
+    const { debug } = await import('./debug.js');
+    const path = `/session/${this.sessionID}/${type}`;
 
     let body;
 
@@ -92,13 +94,21 @@ class Peer extends EventTarget {
       body = data;
     }
 
-    return await fetch(`${XHR_ENDPOINT}/session/${this.sessionID}/${type}`, {
+    body = JSON.stringify(body);
+
+    debug(`request\n${path}\n${body}`);
+
+    const response = await fetch(`${XHR_ENDPOINT}${path}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: body && JSON.stringify(body)
+      body
     }).then(res => res.text());
+
+    debug(`response\n${path}\n${response}`);
+
+    return response;
   }
 }
 

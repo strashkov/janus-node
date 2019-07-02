@@ -18,3 +18,8 @@ video {
 .flip {
    transform: scale(-1, 1);
 }
+.debug {
+   resize: none;
+   width: 1080px;
+   height: 700px;
+}

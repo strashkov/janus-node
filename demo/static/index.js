@@ -6,6 +6,7 @@
 
   const PLUGIN = 'janus.plugin.nosip';
   const { XHR_ENDPOINT, WS_ENDPOINT } = await import('./env.js');
+  const { debug, clear } = await import('./debug.js');
   let sessionID;
   let localStream;
   let ws;
@@ -21,11 +22,15 @@
 
   async function start() {
     const { getLocalStream } = await import('./devices.js');
-    localStream = await getLocalStream();
+
+    clear();
 
     this.classList.add('hidden');
     document.getElementById('release').classList.remove('hidden');
     document.getElementById('content').classList.remove('hidden');
+
+    localStream = await getLocalStream();
+    debug('got local stream');
 
     document.getElementById('localV1').srcObject = localStream;
     document.getElementById('localV2').srcObject = localStream;
@@ -36,8 +41,11 @@
       method: 'POST'
     }).then(res => res.text());
 
+    debug(`session created ${sessionID}`);
+
     ws = new WebSocket(`${WS_ENDPOINT}/${sessionID}`);
     ws.addEventListener('message', async (event) => {
+      debug(`ws message\n${event.data}`);
       try {
         const { type, data } = JSON.parse(event.data);
         const { sender } = data;
@@ -85,7 +93,7 @@
           }
         }
       } catch (err) {
-        console.error(err);
+        debug(`ERR: ${err.message}`);
       }
     });
 
@@ -95,15 +103,16 @@
     callee = await createCallee(PLUGIN, sessionID, localStream);
 
     caller.addEventListener('connected', () => {
+      debug('caller connected');
       document.getElementById('remoteV1').srcObject = caller.stream;
     });
 
     callee.addEventListener('connected', () => {
+      debug('callee connected');
       document.getElementById('remoteV2').srcObject = callee.stream;
     });
 
     await caller.createOffer();
-
   }
 
   async function release() {
@@ -120,5 +129,6 @@
     await fetch(`${XHR_ENDPOINT}/destroy/${sessionID}/`, {
       method: 'POST'
     });
+    debug('destroy session');
   }
 })();
