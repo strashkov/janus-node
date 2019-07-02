@@ -6,11 +6,15 @@ import { EventEmitter } from 'events';
 
 const logger = console;
 
-const WS_PORT = parseInt(<string>argv['ws-port'] || process.env.WS_PORT || '8080', 10);
-const HTTP_PORT = parseInt(<string>argv['http-port'] || process.env.HTTP_PORT || '8081', 10);
+const WS_PORT = parseInt(<string>argv['ws-port'] || process.env.JANUS_NODE_WS_PORT || '8080', 10);
+const HTTP_PORT = parseInt(
+  <string>argv['http-port'] ||
+  process.env.JANUS_NODE_HTTP_PORT ||
+  '8081',
+  10);
 const JANUS_SERVER_ADDRESS = <string>(
   argv['janus-server'] ||
-  process.env['JANUS-SERVER'] ||
+  process.env.JANUS_NODE_SERVER_ADDRESS ||
   'ws://127.0.0.1:8090'
 );
 const JANUS_PROTOCOL_NAME = 'janus-protocol';
