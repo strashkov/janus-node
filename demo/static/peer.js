@@ -51,7 +51,7 @@ class Peer extends EventTarget {
     this.pendingCandidates = new Set();
   }
   async addIceCandidate(candidate) {
-    if (this.connection.remoteDescription) {
+    if (this.connection.remoteDescription && this.connection.remoteDescription.sdp) {
       await this.connection.addIceCandidate(new RTCIceCandidate(candidate));
     } else{
       this.pendingCandidates.add(candidate);
